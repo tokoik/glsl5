@@ -1,0 +1,280 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7D5BEBD613B783BD007F4FB6 /* glsl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD413B783BD007F4FB6 /* glsl.cpp */; };
+		7D5BEBD813B783C5007F4FB6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD713B783C5007F4FB6 /* main.cpp */; };
+		7D5BEBDB13B783D3007F4FB6 /* normalmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD913B783D3007F4FB6 /* normalmap.cpp */; };
+		7D5BEBF213B7845E007F4FB6 /* sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BEBEE13B7845E007F4FB6 /* sphere.cpp */; };
+		7D5BEBF313B7845E007F4FB6 /* trackball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BEBF013B7845E007F4FB6 /* trackball.cpp */; };
+		7D5BEBF413B7847C007F4FB6 /* room2nx.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBDC13B783E3007F4FB6 /* room2nx.raw */; };
+		7D5BEBF513B7847C007F4FB6 /* room2ny.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBDD13B783F2007F4FB6 /* room2ny.raw */; };
+		7D5BEBF613B7847C007F4FB6 /* room2nz.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBDE13B783FD007F4FB6 /* room2nz.raw */; };
+		7D5BEBF713B7847C007F4FB6 /* room2px.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBDF13B78406007F4FB6 /* room2px.raw */; };
+		7D5BEBF813B7847C007F4FB6 /* room2py.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBE013B7840E007F4FB6 /* room2py.raw */; };
+		7D5BEBF913B7847C007F4FB6 /* room2pz.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBE413B78430007F4FB6 /* room2pz.raw */; };
+		7D5BEBFA13B7847C007F4FB6 /* bump_a.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBCF13B783AA007F4FB6 /* bump_a.raw */; };
+		7D5BEBFB13B7847C007F4FB6 /* bump_b.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD013B783AA007F4FB6 /* bump_b.raw */; };
+		7D5BEBFC13B7847C007F4FB6 /* dotbump.raw in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD113B783B7007F4FB6 /* dotbump.raw */; };
+		7D5BEBFD13B7847C007F4FB6 /* bump2.frag in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBC913B7837D007F4FB6 /* bump2.frag */; };
+		7D5BEBFE13B7847C007F4FB6 /* bump2.vert in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBCA13B7837D007F4FB6 /* bump2.vert */; };
+		7D5BEBFF13B7847C007F4FB6 /* envbump.frag in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD213B783B7007F4FB6 /* envbump.frag */; };
+		7D5BEC0013B7847C007F4FB6 /* envbump.vert in Resources */ = {isa = PBXBuildFile; fileRef = 7D5BEBD313B783B7007F4FB6 /* envbump.vert */; };
+		7D7AF85F1222C8CC003A0434 /* opengl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7D7AF85E1222C8CC003A0434 /* opengl.icns */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7D1E90EE1123E36C005E6C75 /* glsl5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glsl5.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D1E90F11123E36C005E6C75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D5BEBC913B7837D007F4FB6 /* bump2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bump2.frag; sourceTree = "<group>"; };
+		7D5BEBCA13B7837D007F4FB6 /* bump2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bump2.vert; sourceTree = "<group>"; };
+		7D5BEBCF13B783AA007F4FB6 /* bump_a.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = bump_a.raw; sourceTree = "<group>"; };
+		7D5BEBD013B783AA007F4FB6 /* bump_b.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = bump_b.raw; sourceTree = "<group>"; };
+		7D5BEBD113B783B7007F4FB6 /* dotbump.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dotbump.raw; sourceTree = "<group>"; };
+		7D5BEBD213B783B7007F4FB6 /* envbump.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = envbump.frag; sourceTree = "<group>"; };
+		7D5BEBD313B783B7007F4FB6 /* envbump.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = envbump.vert; sourceTree = "<group>"; };
+		7D5BEBD413B783BD007F4FB6 /* glsl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glsl.cpp; sourceTree = "<group>"; };
+		7D5BEBD513B783BD007F4FB6 /* glsl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
+		7D5BEBD713B783C5007F4FB6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7D5BEBD913B783D3007F4FB6 /* normalmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = normalmap.cpp; sourceTree = "<group>"; };
+		7D5BEBDA13B783D3007F4FB6 /* normalmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = normalmap.h; sourceTree = "<group>"; };
+		7D5BEBDC13B783E3007F4FB6 /* room2nx.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2nx.raw; sourceTree = "<group>"; };
+		7D5BEBDD13B783F2007F4FB6 /* room2ny.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2ny.raw; sourceTree = "<group>"; };
+		7D5BEBDE13B783FD007F4FB6 /* room2nz.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2nz.raw; sourceTree = "<group>"; };
+		7D5BEBDF13B78406007F4FB6 /* room2px.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2px.raw; sourceTree = "<group>"; };
+		7D5BEBE013B7840E007F4FB6 /* room2py.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2py.raw; sourceTree = "<group>"; };
+		7D5BEBE413B78430007F4FB6 /* room2pz.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = room2pz.raw; sourceTree = "<group>"; };
+		7D5BEBEE13B7845E007F4FB6 /* sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphere.cpp; sourceTree = "<group>"; };
+		7D5BEBEF13B7845E007F4FB6 /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
+		7D5BEBF013B7845E007F4FB6 /* trackball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = trackball.cpp; sourceTree = "<group>"; };
+		7D5BEBF113B7845E007F4FB6 /* trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trackball.h; sourceTree = "<group>"; };
+		7D7AF85E1222C8CC003A0434 /* opengl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = opengl.icns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D1E90EC1123E36C005E6C75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7D1E90D81123E2F7005E6C75 = {
+			isa = PBXGroup;
+			children = (
+				7D5BEBD713B783C5007F4FB6 /* main.cpp */,
+				7D5BEBD513B783BD007F4FB6 /* glsl.h */,
+				7D5BEBD413B783BD007F4FB6 /* glsl.cpp */,
+				7D5BEBDA13B783D3007F4FB6 /* normalmap.h */,
+				7D5BEBD913B783D3007F4FB6 /* normalmap.cpp */,
+				7D5BEBEF13B7845E007F4FB6 /* sphere.h */,
+				7D5BEBEE13B7845E007F4FB6 /* sphere.cpp */,
+				7D5BEBF113B7845E007F4FB6 /* trackball.h */,
+				7D5BEBF013B7845E007F4FB6 /* trackball.cpp */,
+				7D5BEBDC13B783E3007F4FB6 /* room2nx.raw */,
+				7D5BEBDD13B783F2007F4FB6 /* room2ny.raw */,
+				7D5BEBDE13B783FD007F4FB6 /* room2nz.raw */,
+				7D5BEBDF13B78406007F4FB6 /* room2px.raw */,
+				7D5BEBE013B7840E007F4FB6 /* room2py.raw */,
+				7D5BEBE413B78430007F4FB6 /* room2pz.raw */,
+				7D5BEBCF13B783AA007F4FB6 /* bump_a.raw */,
+				7D5BEBD013B783AA007F4FB6 /* bump_b.raw */,
+				7D5BEBD113B783B7007F4FB6 /* dotbump.raw */,
+				7D5BEBC913B7837D007F4FB6 /* bump2.frag */,
+				7D5BEBCA13B7837D007F4FB6 /* bump2.vert */,
+				7D5BEBD213B783B7007F4FB6 /* envbump.frag */,
+				7D5BEBD313B783B7007F4FB6 /* envbump.vert */,
+				7D1E90EF1123E36C005E6C75 /* Products */,
+				7D1E90F11123E36C005E6C75 /* Info.plist */,
+				7D7AF85E1222C8CC003A0434 /* opengl.icns */,
+			);
+			sourceTree = "<group>";
+		};
+		7D1E90EF1123E36C005E6C75 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D1E90EE1123E36C005E6C75 /* glsl5.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D1E90ED1123E36C005E6C75 /* glsl5 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D1E90F41123E36D005E6C75 /* Build configuration list for PBXNativeTarget "glsl5" */;
+			buildPhases = (
+				7D1E90EA1123E36C005E6C75 /* Resources */,
+				7D1E90EB1123E36C005E6C75 /* Sources */,
+				7D1E90EC1123E36C005E6C75 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = glsl5;
+			productName = glsl5;
+			productReference = 7D1E90EE1123E36C005E6C75 /* glsl5.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D1E90DA1123E2F7005E6C75 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 7D1E90DD1123E2F7005E6C75 /* Build configuration list for PBXProject "glsl5" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 7D1E90D81123E2F7005E6C75;
+			productRefGroup = 7D1E90EF1123E36C005E6C75 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7D1E90ED1123E36C005E6C75 /* glsl5 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D1E90EA1123E36C005E6C75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D5BEBF413B7847C007F4FB6 /* room2nx.raw in Resources */,
+				7D5BEBF513B7847C007F4FB6 /* room2ny.raw in Resources */,
+				7D5BEBF613B7847C007F4FB6 /* room2nz.raw in Resources */,
+				7D5BEBF713B7847C007F4FB6 /* room2px.raw in Resources */,
+				7D5BEBF813B7847C007F4FB6 /* room2py.raw in Resources */,
+				7D5BEBF913B7847C007F4FB6 /* room2pz.raw in Resources */,
+				7D5BEBFA13B7847C007F4FB6 /* bump_a.raw in Resources */,
+				7D5BEBFB13B7847C007F4FB6 /* bump_b.raw in Resources */,
+				7D5BEBFC13B7847C007F4FB6 /* dotbump.raw in Resources */,
+				7D5BEBFD13B7847C007F4FB6 /* bump2.frag in Resources */,
+				7D5BEBFE13B7847C007F4FB6 /* bump2.vert in Resources */,
+				7D5BEBFF13B7847C007F4FB6 /* envbump.frag in Resources */,
+				7D5BEC0013B7847C007F4FB6 /* envbump.vert in Resources */,
+				7D7AF85F1222C8CC003A0434 /* opengl.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D1E90EB1123E36C005E6C75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D5BEBD613B783BD007F4FB6 /* glsl.cpp in Sources */,
+				7D5BEBD813B783C5007F4FB6 /* main.cpp in Sources */,
+				7D5BEBDB13B783D3007F4FB6 /* normalmap.cpp in Sources */,
+				7D5BEBF213B7845E007F4FB6 /* sphere.cpp in Sources */,
+				7D5BEBF313B7845E007F4FB6 /* trackball.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7D1E90DB1123E2F7005E6C75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		7D1E90DC1123E2F7005E6C75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		7D1E90F21123E36D005E6C75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					GLUT,
+					"-framework",
+					OpenGL,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = glsl5;
+			};
+			name = Debug;
+		};
+		7D1E90F31123E36D005E6C75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					GLUT,
+					"-framework",
+					OpenGL,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = glsl5;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D1E90DD1123E2F7005E6C75 /* Build configuration list for PBXProject "glsl5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D1E90DB1123E2F7005E6C75 /* Debug */,
+				7D1E90DC1123E2F7005E6C75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D1E90F41123E36D005E6C75 /* Build configuration list for PBXNativeTarget "glsl5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D1E90F21123E36D005E6C75 /* Debug */,
+				7D1E90F31123E36D005E6C75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7D1E90DA1123E2F7005E6C75 /* Project object */;
+}
