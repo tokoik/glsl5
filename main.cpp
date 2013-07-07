@@ -134,22 +134,22 @@ static void init(void)
   glGenTextures(1, &tex);
   glBindTexture(GL_TEXTURE_2D, tex);
 
-  /* 法線マップの作成 */
-  makeNormalMap(texture, TEXWIDTH, TEXHEIGHT, 20.0, texture1);
-
-  /* テクスチャ画像はワード単位に詰め込まれている */
-  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
   /* ミップマップを自動生成する */
   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
 
   /* テクスチャを拡大・縮小する方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
   /* テクスチャの繰り返し方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+  /* テクスチャ画像はワード単位に詰め込まれている */
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+  /* 法線マップの作成 */
+  makeNormalMap(texture, TEXWIDTH, TEXHEIGHT, 20.0, texture1);
 
   /* テクスチャの割り当て */
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXWIDTH, TEXHEIGHT, 0,
@@ -170,6 +170,9 @@ static void init(void)
   /* テクスチャの繰り返し方法の指定 */
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+  /* テクスチャ画像はバイト単位に詰め込まれている */
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
   for (int i = 0; i < 6; ++i) {
     /* キューブマップのテクスチャファイル名 */
