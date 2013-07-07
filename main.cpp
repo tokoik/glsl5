@@ -34,6 +34,7 @@ static GLuint gl2Program;
 */
 #define TEXWIDTH  256                      /* テクスチャの幅　　　 */
 #define TEXHEIGHT 256                      /* テクスチャの高さ　　 */
+static const char texture1[] = "dotbump.raw";  /* テクスチャファイル名 */
 
 /*
 ** 法線マップを作成する関数の宣言
@@ -53,9 +54,9 @@ static void init(void)
   /* シェーダプログラムのコンパイル／リンク結果を得る変数 */
   GLint compiled, linked;
 
-  /* 法線マップを格納する配列 */
-  GLubyte texture[TEXHEIGHT * TEXWIDTH * 4];
-  GLuint tex;
+  /* テクスチャの読み込みに使う配列 */
+  GLubyte texture[TEXHEIGHT][TEXWIDTH][4];
+  GLuint tex, env;
 
   /* 初期設定 */
   glClearColor(0.3f, 0.3f, 1.0f, 0.0f);
@@ -122,57 +123,54 @@ static void init(void)
   /* シェーダプログラムの適用 */
   glUseProgram(gl2Program);
 
-  /* テクスチャユニット０を指定する */
-  glUniform1i(glGetUniformLocation(gl2Program, "texture"), 0);
-
-  /* 環境マップにはテクスチャユニット１を指定する */
-  glUniform1i(glGetUniformLocation(gl2Program, "environment"), 1);
-
   /* 接ベクトルを渡すために使う attribute 変数のハンドルを得る */
   tangent = glGetAttribLocation(gl2Program, "tangent");
 
+  /* テクスチャユニット０を指定する */
+  glUniform1i(glGetUniformLocation(gl2Program, "texture"), 0);
+  glActiveTexture(GL_TEXTURE0);
+
+  /* テクスチャオブジェクトの作成と結合 */
+  glGenTextures(1, &tex);
+  glBindTexture(GL_TEXTURE_2D, tex);
+
+  /* 法線マップの作成 */
+  makeNormalMap(texture, TEXWIDTH, TEXHEIGHT, 20.0, texture1);
+
   /* テクスチャ画像はワード単位に詰め込まれている */
   glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-  
+
+  /* ミップマップを自動生成する */
+  glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+
   /* テクスチャを拡大・縮小する方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  
+
   /* テクスチャの繰り返し方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  
-  /* テクスチャユニット０のテクスチャ環境 */
-  glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-  
-  /* 法線マップの作成 */
-  makeNormalMap(texture, TEXWIDTH, TEXHEIGHT, 20.0, "dotbump.raw");
-  
-  /* テクスチャユニット０に法線マップを割り当てる */
+
+  /* テクスチャの割り当て */
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXWIDTH, TEXHEIGHT, 0,
     GL_RGBA, GL_UNSIGNED_BYTE, texture);
-  
-  /* テクスチャユニット１用のテクスチャオブジェクトを作成する */
-  GLuint texname[1];
-  glGenTextures(1, texname);
-  
-#if defined(WIN32)
-  glActiveTexture =
-    (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
-#endif
-  
-  /* テクスチャユニット１に切り替える */
+
+  /* 環境マップにはテクスチャユニット１を指定する */
+  glUniform1i(glGetUniformLocation(gl2Program, "environment"), 1);
   glActiveTexture(GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_CUBE_MAP, texname[0]);
+
+  /* 環境マップのテクスチャオブジェクトの作成と結合 */
+  glGenTextures(1, &env);
+  glBindTexture(GL_TEXTURE_CUBE_MAP, env);
 
   /* テクスチャを拡大・縮小する方法の指定 */
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  
+
   /* テクスチャの繰り返し方法の指定 */
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  
+
   for (int i = 0; i < 6; ++i) {
     /* キューブマップのテクスチャファイル名 */
     static const char *cubemaps[] = {
@@ -195,7 +193,7 @@ static void init(void)
     /* キューブマップの読み込みに使う配列 */
     GLubyte cubemap[128][128][4];
     FILE *fp;
-  
+
     /* テクスチャ画像の読み込み */
     if ((fp = fopen(cubemaps[i], "rb")) != NULL) {
       fread(cubemap, sizeof cubemap, 1, fp);
@@ -204,19 +202,12 @@ static void init(void)
     else {
       perror(cubemaps[i]);
     }
-  
+
     /* テクスチャの割り当て */
     glTexImage2D(target[i], 0, GL_RGBA, 128, 128, 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, cubemap);
+      GL_RGBA, GL_UNSIGNED_BYTE, cubemap);
   }
-
-  /* テクスチャユニット０に戻す */
-  glActiveTexture(GL_TEXTURE0);
-
 }
-
-/* トラックボール処理用関数の宣言 */
-#include "trackball.h"
 
 /* 球を描く関数の宣言 */
 #include "sphere.h"
@@ -226,26 +217,16 @@ static void init(void)
 */
 static void scene(void)
 {
+  static const GLfloat diffuse[] = { 0.6f, 0.1f, 0.1f, 1.0f };
+  static const GLfloat specular[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 
-  static const GLfloat diffuse[] = { 0.6, 0.1, 0.1, 1.0 };
-  static const GLfloat specular[] = { 0.4, 0.4, 0.4, 1.0 };
-  
   /* 材質の設定 */
   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffuse);
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0f);
-  
-  /* 法線マップのマッピング開始 */
-  glEnable(GL_TEXTURE_2D);
-  
-  /* トラックボール処理による回転 */
-  glMultMatrixd(trackballRotation());
-  
+
   /* 球を描く */
   sphere(1.0, 64, 32, tangent);
-  
-  /* 法線マップのマッピング終了 */
-  glDisable(GL_TEXTURE_2D);
 }
 
 
@@ -253,24 +234,30 @@ static void scene(void)
 ** GLUT のコールバック関数 **
 ****************************/
 
+/* トラックボール処理用関数の宣言 */
+#include "trackball.h"
+
 static void display(void)
 {
-  /* モデルビュー変換行列の設定 */
+  /* モデルビュー変換行列の初期化 */
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  
-  /* 光源の位置を設定 */
-  glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-  
-  /* 視点の移動（物体の方を奥に移動）*/
-  glTranslated(0.0, 0.0, -5.0);
-  
+
   /* 画面クリア */
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
+
+  /* 光源の位置を設定 */
+  glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+
+  /* 視点の移動（物体の方を奥に移動）*/
+  glTranslated(0.0, 0.0, -5.0);
+
+  /* トラックボール処理による回転 */
+  glMultMatrixd(trackballRotation());
+
   /* シーンの描画 */
   scene();
-  
+
   /* ダブルバッファリング */
   glutSwapBuffers();
 }
@@ -279,13 +266,13 @@ static void resize(int w, int h)
 {
   /* トラックボールする範囲 */
   trackballRegion(w, h);
-  
+
   /* ウィンドウ全体をビューポートにする */
   glViewport(0, 0, w, h);
-  
+
   /* 透視変換行列の指定 */
   glMatrixMode(GL_PROJECTION);
-  
+
   /* 透視変換行列の初期化 */
   glLoadIdentity();
   gluPerspective(40.0, (double)w / (double)h, 1.0, 100.0);
@@ -316,8 +303,8 @@ static void mouse(int button, int state, int x, int y)
       break;
     }
     break;
-    default:
-      break;
+  default:
+    break;
   }
 }
 
