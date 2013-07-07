@@ -4,16 +4,16 @@
 
 attribute vec3 tangent;
 
-varying vec3 light;
-varying vec3 view;
+varying vec4 p;
+varying vec3 l;
 varying vec3 n;
 varying vec3 t;
 
 void main()
 {
-  // 視線ベクトルと光線ベクトルを求める
-  view = vec3(gl_ModelViewMatrix * gl_Vertex);
-  light = gl_LightSource[0].position.xyz - view;
+  // 光線ベクトルと視線ベクトルを求める
+  p = gl_ModelViewMatrix * gl_Vertex;
+  l = normalize((gl_LightSource[0].position * p.w - gl_LightSource[0].position.w * p).xyz);
   
   // 法線ベクトルと接線ベクトルを求める
   n = normalize(gl_NormalMatrix * gl_Normal);
