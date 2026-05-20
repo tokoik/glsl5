@@ -1,4 +1,4 @@
-/*
-** ‹…‚Ì•`‰æ
+ï»¿/*
+** çƒã®æç”»
 */
 extern void sphere(double radius, int slices, int stacks, GLint tangent);
