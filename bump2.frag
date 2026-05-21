@@ -9,7 +9,7 @@ varying vec3 light;
 varying vec3 n;
 varying vec3 t;
 
-void main (void)
+void main ()
 {
   // 接空間から視点座標系への変換行列
   vec3 fn = normalize(n);
