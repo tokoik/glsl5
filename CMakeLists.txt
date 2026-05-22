@@ -21,6 +21,9 @@ set(HEADERS
 set(RESOURCE_FILES
 )
 
+# ソリューションエクスプローラー用のグループ分け
+source_group("Shader Files" FILES ${RESOURCE_FILES})
+
 if(APPLE)
 
     # macOS の設定
@@ -66,7 +69,7 @@ if(APPLE)
 elseif(WIN32)
 
     # Windows (Visual Studio) の設定
-    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${RESOURCE_FILES})
 
     # glext.h と khrplatform.h をダウンロードする
     include(FetchContent)
@@ -105,11 +108,13 @@ elseif(WIN32)
     target_compile_definitions(${PROJECT_NAME} PRIVATE FREEGLUT_STATIC)
 
     # 起動時に読み込めるようにビルド後にリソースファイルを実行ファイルと同じ階層にコピーする
-    foreach(TEX_FILE IN LISTS RESOURCE_FILES)
+    foreach(RESOURCE_FILE IN LISTS RESOURCE_FILES)
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_SOURCE_DIR}/${TEX_FILE}"
-            "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
+                "${CMAKE_CURRENT_SOURCE_DIR}/${RESOURCE_FILE}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        )
     endforeach()
 
     # このプロジェクトを Visual Studio のスタートアッププロジェクトとして設定する
@@ -121,7 +126,7 @@ elseif(WIN32)
 else()
 
     # Ubuntu Linux (その他UNIX系) の設定
-    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${RESOURCE_FILES})
 
     # OpenGL と GLUT を探す
     find_package(OpenGL REQUIRED)
@@ -137,11 +142,13 @@ else()
     )
 
     # 起動時に読み込めるようにビルド後にリソースファイルを実行ファイルと同じ階層にコピーする
-    foreach(TEX_FILE IN LISTS RESOURCE_FILES)
+    foreach(RESOURCE_FILE IN LISTS RESOURCE_FILES)
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_SOURCE_DIR}/${TEX_FILE}"
-            "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
+                "${CMAKE_CURRENT_SOURCE_DIR}/${RESOURCE_FILE}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        )
     endforeach()
 
 endif()
