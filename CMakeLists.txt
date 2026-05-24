@@ -7,18 +7,35 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ソースファイル
 set(SOURCES
     main.cpp
-    scene.cpp
+    glsl.cpp
+    sphere.cpp
+    normalmap.cpp
     trackball.cpp
 )
 
 # ヘッダファイル
 set(HEADERS
-    scene.h
+    glsl.h
+    sphere.h
+    normalmap.h
     trackball.h
 )
 
 # リソースファイル
 set(RESOURCE_FILES
+    bump2.vert
+    bump2.frag
+    envbump.vert
+    envbump.frag
+    bump_a.raw
+    bump_b.raw
+    dotbump.raw
+    room2nx.raw
+    room2px.raw
+    room2ny.raw
+    room2py.raw
+    room2nz.raw
+    room2pz.raw
 )
 
 # ソリューションエクスプローラー用のグループ分け

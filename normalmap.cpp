@@ -1,16 +1,25 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#if defined(WIN32)
-#  include "glut.h"
-#elif defined(__APPLE__) || defined(MACOSX)
+﻿/*
+** 法線マップの作成
+*/
+#include "normalmap.h"
+
+/* OpenGL */
+#if defined(__APPLE__)
+#  define GL_SILENCE_DEPRECATION
 #  include <GLUT/glut.h>
 #else
+#  if defined(_MSC_VER)
+//#    pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+#    define _USE_MATH_DEFINES
+#    define _CRT_SECURE_NO_WARNINGS
+#  endif
 #  include <GL/glut.h>
 #endif
 
-#include "normalmap.h"
+/* 標準ライブラリ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 /*
 ** 高さマップをもとに法線マップを作成する
