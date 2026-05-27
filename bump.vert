@@ -1,6 +1,6 @@
 #version 120
 
-// embm.vert
+// bump.vert
 
 // 頂点の接線ベクトル
 attribute vec3 tangent;
@@ -10,9 +10,6 @@ varying vec3 tlight;
 
 // ラスタライザに送る接空間の視線ベクトル
 varying vec3 tview;
-
-// ラスタライザに送る接空間の基底ベクトル
-varying vec3 t, b, n;
 
 void main()
 {
@@ -36,9 +33,9 @@ void main()
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
   // 法線ベクトルと接線ベクトルから接空間への変換行列
-  n = normal;
-  t = normalize(gl_NormalMatrix * tangent);
-  b = cross(n, t);
+  vec3 n = normal;
+  vec3 t = normalize(gl_NormalMatrix * tangent);
+  vec3 b = cross(n, t);
 
   // 接空間における光線ベクトル
   tlight.x = dot(t, light);

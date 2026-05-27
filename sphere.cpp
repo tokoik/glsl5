@@ -9,25 +9,19 @@
 /*
 ** ローカル座標系から normal を法線ベクトルとする接ベクトル tangent を求める
 */
-static void setTangent(const double normal[3], GLint tangentLoc)
+static void setTangent(const double normal[3], double tangent[3])
 {
-  double length = normal[0] * normal[0] + normal[2] * normal[2];
-  double tangent[3];
+  double length = hypot(normal[0], normal[2]);
   
   /* 接ベクトル = (0, 1, 0) × n */
   if (length > 0) {
-    double a = sqrt(length);
-    
-    tangent[0] = normal[2] / a;
+    tangent[0] = normal[2] / length;
     tangent[1] = 0.0;
-    tangent[2] = -normal[0] / a;
+    tangent[2] = -normal[0] / length;
   }
   else {
     tangent[0] = tangent[1] = tangent[2] = 0.0;
   }
-
-  /* 接ベクトルを attribute 変数に渡す */
-  glVertexAttrib3dv(tangentLoc, tangent);
 }
 
 /*
@@ -41,7 +35,7 @@ void sphere(double radius, int slices, int stacks, GLint tangentLoc)
     double t1 = (double)j / (double)stacks;
     double r0 = sin(M_PI * t0);
     double r1 = sin(M_PI * t1);
-    double normal[2][3], position[2][3];
+    double normal[2][3], position[2][3], tangent[3];
     
     /* 法線単位ベクトルの y 成分 */
     normal[0][1] = -cos(M_PI * t0);
@@ -81,9 +75,12 @@ void sphere(double radius, int slices, int stacks, GLint tangentLoc)
       /* 法線ベクトルを設定する */
       glNormal3dv(normal[0]);
 
-      /* 接ベクトルを設定する */
-      setTangent(normal[0], tangentLoc);
-      
+      /* 接ベクトルを求める */
+      setTangent(normal[0], tangent);
+
+      /* 接ベクトルを attribute 変数に設定する */
+      glVertexAttrib3dv(tangentLoc, tangent);
+
       /* 頂点位置 */
       glVertex3dv(position[0]);
       
@@ -93,9 +90,12 @@ void sphere(double radius, int slices, int stacks, GLint tangentLoc)
       /* 法線ベクトルを設定する */
       glNormal3dv(normal[1]);
 
-      /* 接ベクトルを設定する */
-      setTangent(normal[1], tangentLoc);
+      /* 接ベクトルを求める */
+      setTangent(normal[1], tangent);
       
+      /* 接ベクトルを attribute 変数に設定する */
+      glVertexAttrib3dv(tangentLoc, tangent);
+
       /* 頂点位置 */
       glVertex3dv(position[1]);
     }

@@ -1,6 +1,6 @@
 #version 120
 
-// embm.frag
+// bump.frag
 
 // ラスタライザから受け取る接空間の光線ベクトルの補間値
 varying vec3 tlight;
@@ -8,14 +8,8 @@ varying vec3 tlight;
 // ラスタライザから受け取る接空間の視線ベクトルの補間値
 varying vec3 tview;
 
-// ラスタライザから受け取る接空間の基底ベクトルの補間値
-varying vec3 t, b, n;
-
 // テクスチャのサンプラ
 uniform sampler2D texture;
-
-// 環境マップのサンプラ
-uniform samplerCube environment;
 
 void main ()
 {
@@ -26,14 +20,14 @@ void main ()
   // 接空間における光線ベクトル
   vec3 flight = normalize(tlight);
 
+  // 接空間における中間ベクトル
+  vec3 fhalfway = normalize(tlight + tview);
+
   // 拡散反射率
   float diffuse = max(dot(fnormal, flight), 0.0);
 
-  // 視点座標系への変換行列
-  mat3 toView = mat3(normalize(t), normalize(b), normalize(n));
-
-  // 視線の反射ベクトルでキューブマップをサンプリングして環境の色を得る
-  vec4 specular = textureCube(environment, toView * reflect(fnormal, tview));
+  // 鏡面反射率
+  float specular = pow(max(dot(fnormal, fhalfway), 0.0), gl_FrontMaterial.shininess);
 
   // フラグメントの色
   gl_FragColor = gl_FrontLightProduct[0].ambient

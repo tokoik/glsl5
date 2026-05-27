@@ -23,10 +23,10 @@ set(HEADERS
 
 # リソースファイル
 set(RESOURCE_FILES
-    bump2.vert
-    bump2.frag
-    envbump.vert
-    envbump.frag
+    bump.vert
+    bump.frag
+    embm.vert
+    embm.frag
     bump_a.raw
     bump_b.raw
     dotbump.raw
