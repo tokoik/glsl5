@@ -19,7 +19,7 @@ void main()
   // テクスチャ座標
   gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
-  // 頂点の視点座標系の頂点の位置
+  // 視点座標系の頂点の位置
   vec4 position = gl_ModelViewMatrix * gl_Vertex;
 
   // 視点座標系の法線ベクトル
