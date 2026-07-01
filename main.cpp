@@ -128,12 +128,9 @@ static void init()
   glGenTextures(1, &tex);
   glBindTexture(GL_TEXTURE_2D, tex);
 
-  /* ミップマップを自動生成する */
-  glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
-
   /* テクスチャを拡大・縮小する方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
   /* テクスチャの繰り返し方法の指定 */
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

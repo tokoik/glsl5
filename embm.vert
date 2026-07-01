@@ -5,11 +5,11 @@
 // 頂点の接線ベクトル
 attribute vec3 tangent;
 
-// ラスタライザに送る接空間の光線ベクトル
-varying vec3 tlight;
+// ラスタライザに送る視点座標系の光線ベクトル
+varying vec3 light;
 
-// ラスタライザに送る接空間の視線ベクトル
-varying vec3 tview;
+// ラスタライザに送る視点座標系の視線ベクトル
+varying vec3 view;
 
 // ラスタライザに送る接空間の基底ベクトル
 varying vec3 t, b, n;
@@ -29,24 +29,14 @@ void main()
   vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
 
   // 視点座標系の光線ベクトル
-  vec3 light = normalize((gl_LightSource[0].position * position.w
+  light = normalize((gl_LightSource[0].position * position.w
     - gl_LightSource[0].position.w * position).xyz);
 
   // 視点座標系の視線ベクトル
-  vec3 view = -normalize(position.xyz);
+  view = -normalize(position.xyz);
 
   // 法線ベクトルと接線ベクトルから接空間への変換行列
   n = normal;
   t = normalize(gl_NormalMatrix * tangent);
   b = cross(n, t);
-
-  // 接空間における光線ベクトル
-  tlight.x = dot(t, light);
-  tlight.y = dot(b, light);
-  tlight.z = dot(n, light);
-
-  // 接空間における視線ベクトル
-  tview.x = dot(t, view);
-  tview.y = dot(b, view);
-  tview.z = dot(n, view);
 }

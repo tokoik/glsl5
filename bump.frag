@@ -13,7 +13,7 @@ uniform sampler2D color;
 
 void main ()
 {
-  // 法線マップから接空間の法線ベクトル得る
+  // 法線マップから接空間の法線ベクトルを得る
   vec4 fcolor = texture2DProj(color, gl_TexCoord[0]);
   vec3 fnormal = fcolor.rgb * 2.0 - 1.0;
 
