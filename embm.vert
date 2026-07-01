@@ -19,21 +19,21 @@ void main()
   // 頂点のクリッピング座標値
   gl_Position = ftransform();
 
-  // 頂点のワールド座標値
+  // テクスチャ座標
+  gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+
+  // 頂点の視点座標系の頂点の位置
   vec4 position = gl_ModelViewMatrix * gl_Vertex;
 
-  // 法線ベクトル
+  // 視点座標系の法線ベクトル
   vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
 
-  // 光線ベクトル
+  // 視点座標系の光線ベクトル
   vec3 light = normalize((gl_LightSource[0].position * position.w
     - gl_LightSource[0].position.w * position).xyz);
 
-  // 視線ベクトル
+  // 視点座標系の視線ベクトル
   vec3 view = -normalize(position.xyz);
-
-  // テクスチャ座標
-  gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 
   // 法線ベクトルと接線ベクトルから接空間への変換行列
   n = normal;
