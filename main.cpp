@@ -30,14 +30,14 @@ static const GLfloat lightamb[] = { 0.1f, 0.1f, 0.1f, 1.0f }; /* 環境光強度
 static GLuint gl2Program;
 
 /*
-** 接ベクトルを格納する attribute 変数の場所
+** 接線ベクトルを格納する attribute 変数の場所
 */
 static GLint tangentLoc;
 
 /*
 ** テクスチャのサンプラの uniform 変数の場所
 */
-static GLuint textureLoc;
+static GLuint colorLoc;
 
 /*
 ** 環境マップのサンプラ変数の uniform 変数の場所
@@ -111,13 +111,13 @@ static void init()
     exit(1);
   }
 
-  /* テクスチャのサンプラの uniform 変数の場所を得る */
-  textureLoc = glGetUniformLocation(gl2Program, "color");
-
-  /* 接ベクトルを渡すために使う attribute 変数の場所を得る */
+  /* 接線ベクトルを渡すために使う attribute 変数の場所を得る */
   tangentLoc = glGetAttribLocation(gl2Program, "tangent");
 
-  /* 環境マップのサンプラ変数の uniform 変数の場所を得る */
+  /* テクスチャのサンプラの uniform 変数の場所を得る */
+  colorLoc = glGetUniformLocation(gl2Program, "color");
+
+  /* 環境マップのサンプラの uniform 変数の場所を得る */
   envronmentLoc = glGetUniformLocation(gl2Program, "environment");
 
   /* テクスチャユニット０を指定する */
@@ -252,7 +252,7 @@ static void display()
   glUseProgram(gl2Program);
 
   /* テクスチャのサンプラにテクスチャユニット０を指定する */
-  glUniform1i(textureLoc, 0);
+  glUniform1i(colorLoc, 0);
 
   /* 環境マップのサンプラ変数にテクスチャユニット１を設定 */
   glUniform1i(envronmentLoc, 1);
